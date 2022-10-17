@@ -1,6 +1,6 @@
 let socket = new WebSocket("ws://localhost:8080/ws")
 
-export const connect = () => {
+export const connect = (callback) => {
     console.log("Attempting Connection...")
 
     socket.onopen = () => {
@@ -9,6 +9,7 @@ export const connect = () => {
 
     socket.onmessage = (msg) => {
         console.log(msg)
+        callback(msg)
     }
 
     socket.onclose = event => {
