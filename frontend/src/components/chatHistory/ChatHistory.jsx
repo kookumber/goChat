@@ -1,10 +1,12 @@
 import React from "react";
 import "./chatHistory.scss"
+import Message from "../message/Message"
+
 
 const ChatHistory = ({ chatHistory }) => {
 
     const messages = chatHistory.map((msg, idx) => {
-        return <p key={idx}>{msg.data}</p>
+        return <Message key={idx} message={msg.data}/>
     })
     console.log(messages)
     return (

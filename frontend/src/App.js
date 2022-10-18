@@ -3,32 +3,7 @@ import React from 'react'
 import { connect, sendMsg } from './api/index'
 import Header from './components/header/Header';
 import ChatHistory from './components/chatHistory/ChatHistory';
-
-// const App = () => {
-//   const [chatHistory, setChatHistory] = React.useState([])
-//   console.log("chat History", chatHistory)
-//   // connect((msg) => )
-//   React.useEffect(() => {
-//     connect((msg) => {
-//       console.log('New Message')
-//       setChatHistory(...chatHistory, msg)
-//       console.log(chatHistory)
-//     })
-//   }, [])
-
-//   let send = () => {
-//     console.log("Hello")
-//     sendMsg("Hello")
-//   }
-
-//   return (
-//     <div className="App">
-//       <Header />
-//       <ChatHistory chatHistory={chatHistory}/>
-//       <button onClick={send}>Hit</button>
-//     </div>
-//   )
-// }
+import ChatInput from './components/chatInput/ChatInput';
 
 class App extends React.Component {
   constructor(props){
@@ -48,16 +23,19 @@ class App extends React.Component {
     });
   }
 
-  send () {
-    console.log("Hello")
-    sendMsg("What's up homie!")
+  send(e) {
+    if (e.keyCode === 13) {
+      sendMsg(e.target.value)
+      e.target.value = ""
+    }
+    
   }
   render() {
     return (
       <div className="App">
         <Header />
         <ChatHistory chatHistory={this.state.chatHistory} />
-        <button onClick={this.send}>Hit</button>
+        <ChatInput send={this.send}/>
       </div>
     );
   }
